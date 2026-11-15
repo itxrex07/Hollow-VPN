@@ -198,6 +198,21 @@ fun ServersScreen(
     onSortServers: (ServersSort) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val referenceStyle = LocalUiSettings.current.uiStyle
+    if (referenceStyle == slop.miho.chumpy.data.UiStyle.KIRAN_A ||
+        referenceStyle == slop.miho.chumpy.data.UiStyle.KIRAN_B ||
+        referenceStyle == slop.miho.chumpy.data.UiStyle.KIRAN
+    ) {
+        ReferenceServersScreen(
+            style = referenceStyle,
+            state = state,
+            onPing = onPing,
+            onSelect = onSelect,
+            onAddSubscription = onAddSubscription,
+            modifier = modifier,
+        )
+        return
+    }
     // The subscription dropdown's open state; survives page switches so a dialog opened
     // from an unfolded card still has its list waiting behind it.
     var dropdownOpen by rememberSaveable { mutableStateOf(false) }

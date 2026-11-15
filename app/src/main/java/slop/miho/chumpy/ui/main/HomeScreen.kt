@@ -136,6 +136,22 @@ fun HomeScreen(
     onHideUpdate: () -> Unit = {},
     modifier: Modifier = Modifier,
 ) {
+    val referenceStyle = LocalUiSettings.current.uiStyle
+    if (referenceStyle == slop.miho.chumpy.data.UiStyle.KIRAN_A ||
+        referenceStyle == slop.miho.chumpy.data.UiStyle.KIRAN_B ||
+        referenceStyle == slop.miho.chumpy.data.UiStyle.KIRAN
+    ) {
+        ReferenceHomeScreen(
+            style = referenceStyle,
+            status = status,
+            home = home,
+            onConnect = onConnect,
+            onDisconnect = onDisconnect,
+            onOpenServers = onOpenServers,
+            modifier = modifier,
+        )
+        return
+    }
     val up = status.state == TunnelState.UP
 
     // A fresh ping every time Home comes into view — switched to, or the app brought back
