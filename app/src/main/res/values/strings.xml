@@ -109,6 +109,8 @@
     <!-- Settings -->
     <string name="settings_interface">Interface</string>
     <string name="settings_style">Style</string>
+    <string name="settings_style_a">Style A</string>
+    <string name="settings_style_b">Style B</string>
     <string name="settings_style_classic">Classic</string>
     <string name="settings_style_kiran">Kiran</string>
     <string name="settings_style_kiran_hint">Dark expressive VPN layout</string>

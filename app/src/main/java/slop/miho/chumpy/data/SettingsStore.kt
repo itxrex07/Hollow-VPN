@@ -36,7 +36,7 @@ enum class FlagStyle { TWEMOJI, SYSTEM, GLOBE }
 enum class IconVariant { CHUMPY, INVERTED, THEMED, DARK }
 
 /** The app-wide visual treatment selected from Appearance. */
-enum class UiStyle { CLASSIC, KIRAN }
+enum class UiStyle { CLASSIC, KIRAN_A, KIRAN_B, KIRAN }
 
 /**
  * The interface accent. ADAPTIVE follows the wallpaper (Material You, Android 12+); the rest
@@ -93,7 +93,7 @@ enum class Accent(val hue: Float) {
 
 /** UI preferences. Nothing sensitive here, so plain SharedPreferences storage is fine. */
 data class UiSettings(
-    val uiStyle: UiStyle = UiStyle.CLASSIC,
+    val uiStyle: UiStyle = UiStyle.KIRAN_A,
     val themeMode: ThemeMode = ThemeMode.SYSTEM,
     val accent: Accent = Accent.ADAPTIVE,
     val slowAnimations: Boolean = false,
@@ -293,7 +293,7 @@ object SettingsStore {
             prefs.getString(KEY_HAPP_USER_ID, null).isNullOrBlank() ||
                 prefs.getString(KEY_HAPP_HWID, null).isNullOrBlank()
         val settings = UiSettings(
-            uiStyle = enumEntry(prefs.getString(KEY_UI_STYLE, null), UiStyle.CLASSIC),
+            uiStyle = enumEntry(prefs.getString(KEY_UI_STYLE, null), UiStyle.KIRAN_A),
             themeMode = enumEntry(prefs.getString(KEY_THEME, null), ThemeMode.SYSTEM),
             accent = enumEntry(prefs.getString(KEY_ACCENT, null), Accent.ADAPTIVE),
             // The speed setting used to be a three-way enum; a stored SLOW carries over.

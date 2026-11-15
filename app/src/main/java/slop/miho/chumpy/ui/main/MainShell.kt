@@ -808,7 +808,11 @@ private fun ShellDestinationPage(
         }
     } else {
         when (val category = SettingsCategory.entries[position - settingsOffset]) {
-            SettingsCategory.INTERFACE -> if (uiSettings.uiStyle == UiStyle.KIRAN) {
+            SettingsCategory.INTERFACE -> if (uiSettings.uiStyle == UiStyle.KIRAN_A) {
+                KiranStyleASettingsScreen(
+                    onChange = onUiSettingsChange,
+                )
+            } else if (uiSettings.uiStyle == UiStyle.KIRAN_B || uiSettings.uiStyle == UiStyle.KIRAN) {
                 KiranSettingsScreen(
                     onChange = onUiSettingsChange,
                 )

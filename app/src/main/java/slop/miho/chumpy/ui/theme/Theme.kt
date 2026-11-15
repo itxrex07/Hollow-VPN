@@ -61,7 +61,9 @@ fun ChumpyTheme(
     content: @Composable () -> Unit,
 ) {
     val darkTheme = when {
-        settings.uiStyle == UiStyle.KIRAN -> true
+        settings.uiStyle == UiStyle.KIRAN_A ||
+            settings.uiStyle == UiStyle.KIRAN_B ||
+            settings.uiStyle == UiStyle.KIRAN -> true
         else -> when (settings.themeMode) {
         ThemeMode.SYSTEM -> isSystemInDarkTheme()
         ThemeMode.LIGHT -> false
@@ -144,7 +146,9 @@ private fun themeColorScheme(
     context: Context,
 ): ColorScheme {
     val scheme = when {
-        settings.uiStyle == UiStyle.KIRAN -> darkColorScheme().withHue(Accent.VIOLET.hue)
+        settings.uiStyle == UiStyle.KIRAN_A -> darkColorScheme().withHue(Accent.GREEN.hue)
+        settings.uiStyle == UiStyle.KIRAN_B || settings.uiStyle == UiStyle.KIRAN ->
+            darkColorScheme().withHue(Accent.VIOLET.hue)
         settings.accent == Accent.ADAPTIVE && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ->
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         settings.accent == Accent.MONO -> monoColorScheme(darkTheme)

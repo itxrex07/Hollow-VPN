@@ -191,8 +191,8 @@ fun InterfaceScreen(
                         title = stringResource(R.string.settings_style),
                         showSelectedLabel = true,
                         options = listOf(
-                            IconChoice(R.drawable.ic_format_paint, R.string.settings_style_classic, UiStyle.CLASSIC),
-                            IconChoice(R.drawable.ic_appearance_fill, R.string.settings_style_kiran, UiStyle.KIRAN),
+                            IconChoice(R.drawable.ic_format_paint, R.string.settings_style_a, UiStyle.KIRAN_A),
+                            IconChoice(R.drawable.ic_appearance_fill, R.string.settings_style_b, UiStyle.KIRAN_B),
                         ),
                         selected = settings.uiStyle,
                         onSelect = { style -> onChange { it.copy(uiStyle = style) } },

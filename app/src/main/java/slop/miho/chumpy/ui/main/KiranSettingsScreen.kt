@@ -74,8 +74,8 @@ fun KiranSettingsScreen(
         KiranSection("Advanced") {
             KiranValueRow("DNS", "Secure DNS", "DoH · 1.1.1.1")
             KiranValueRow("Fragment & Mux", "Xray core options", "Edit")
-            KiranValueRow("Style", "Choose appearance", "Kiran") {
-                onChange { it.copy(uiStyle = slop.miho.chumpy.data.UiStyle.CLASSIC) }
+            KiranValueRow("Style", "Choose appearance", "B") {
+                onChange { it.copy(uiStyle = slop.miho.chumpy.data.UiStyle.KIRAN_A) }
             }
         }
         Spacer(Modifier.height(88.dp))
