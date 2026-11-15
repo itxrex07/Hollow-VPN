@@ -37,6 +37,7 @@ import slop.miho.chumpy.data.Accent
 import slop.miho.chumpy.data.FontRegistry
 import slop.miho.chumpy.data.ThemeMode
 import slop.miho.chumpy.data.UiSettings
+import slop.miho.chumpy.data.UiStyle
 import slop.miho.chumpy.data.WallpaperPalette
 import java.io.File
 
@@ -59,10 +60,13 @@ fun ChumpyTheme(
     settings: UiSettings,
     content: @Composable () -> Unit,
 ) {
-    val darkTheme = when (settings.themeMode) {
+    val darkTheme = when {
+        settings.uiStyle == UiStyle.KIRAN -> true
+        else -> when (settings.themeMode) {
         ThemeMode.SYSTEM -> isSystemInDarkTheme()
         ThemeMode.LIGHT -> false
         ThemeMode.DARK, ThemeMode.AMOLED -> true
+        }
     }
     val context = LocalContext.current
     // The wallpaper seed accents re-theme with the picture; the flow seeds itself on first
@@ -140,6 +144,7 @@ private fun themeColorScheme(
     context: Context,
 ): ColorScheme {
     val scheme = when {
+        settings.uiStyle == UiStyle.KIRAN -> darkColorScheme().withHue(Accent.VIOLET.hue)
         settings.accent == Accent.ADAPTIVE && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ->
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         settings.accent == Accent.MONO -> monoColorScheme(darkTheme)

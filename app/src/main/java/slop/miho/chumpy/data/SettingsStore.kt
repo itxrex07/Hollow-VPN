@@ -35,6 +35,9 @@ enum class FlagStyle { TWEMOJI, SYSTEM, GLOBE }
  */
 enum class IconVariant { CHUMPY, INVERTED, THEMED, DARK }
 
+/** The app-wide visual treatment selected from Appearance. */
+enum class UiStyle { CLASSIC, KIRAN }
+
 /**
  * The interface accent. ADAPTIVE follows the wallpaper (Material You, Android 12+); the rest
  * are the seven rainbow hues. [hue] is the HSL hue the color scheme is built from; ADAPTIVE
@@ -90,6 +93,7 @@ enum class Accent(val hue: Float) {
 
 /** UI preferences. Nothing sensitive here, so plain SharedPreferences storage is fine. */
 data class UiSettings(
+    val uiStyle: UiStyle = UiStyle.CLASSIC,
     val themeMode: ThemeMode = ThemeMode.SYSTEM,
     val accent: Accent = Accent.ADAPTIVE,
     val slowAnimations: Boolean = false,
@@ -289,6 +293,7 @@ object SettingsStore {
             prefs.getString(KEY_HAPP_USER_ID, null).isNullOrBlank() ||
                 prefs.getString(KEY_HAPP_HWID, null).isNullOrBlank()
         val settings = UiSettings(
+            uiStyle = enumEntry(prefs.getString(KEY_UI_STYLE, null), UiStyle.CLASSIC),
             themeMode = enumEntry(prefs.getString(KEY_THEME, null), ThemeMode.SYSTEM),
             accent = enumEntry(prefs.getString(KEY_ACCENT, null), Accent.ADAPTIVE),
             // The speed setting used to be a three-way enum; a stored SLOW carries over.
@@ -353,6 +358,7 @@ object SettingsStore {
 
     private fun write(context: Context, settings: UiSettings) {
         context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit()
+            .putString(KEY_UI_STYLE, settings.uiStyle.name)
             .putString(KEY_THEME, settings.themeMode.name)
             .putString(KEY_ACCENT, settings.accent.name)
             .putBoolean(KEY_SLOW, settings.slowAnimations)
@@ -423,6 +429,7 @@ object SettingsStore {
     }
 
     private const val KEY_THEME = "theme_mode"
+    private const val KEY_UI_STYLE = "ui_style"
     private const val KEY_ACCENT = "accent"
     private const val KEY_SLOW = "slow_animations"
 

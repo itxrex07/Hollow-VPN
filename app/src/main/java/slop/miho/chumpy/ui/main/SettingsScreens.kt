@@ -123,6 +123,7 @@ import slop.miho.chumpy.data.FlagStyle
 import slop.miho.chumpy.data.IconVariant
 import slop.miho.chumpy.data.ThemeMode
 import slop.miho.chumpy.data.UiSettings
+import slop.miho.chumpy.data.UiStyle
 import slop.miho.chumpy.ui.components.FlipTriangleTile
 import slop.miho.chumpy.ui.components.FoldingGroup
 import slop.miho.chumpy.ui.components.InfoChip
@@ -184,6 +185,20 @@ fun InterfaceScreen(
         // No section header any more: the blocks stand on their own, at the gap they had
         // under it.
         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            SettingsGroup(
+                {
+                    IconChoiceRow(
+                        title = stringResource(R.string.settings_style),
+                        showSelectedLabel = true,
+                        options = listOf(
+                            IconChoice(R.drawable.ic_format_paint, R.string.settings_style_classic, UiStyle.CLASSIC),
+                            IconChoice(R.drawable.ic_appearance_fill, R.string.settings_style_kiran, UiStyle.KIRAN),
+                        ),
+                        selected = settings.uiStyle,
+                        onSelect = { style -> onChange { it.copy(uiStyle = style) } },
+                    )
+                },
+            )
             SettingsGroup(
                 {
                     IconChoiceRow(

@@ -93,6 +93,7 @@ import slop.miho.chumpy.ui.ServersUiState
 import slop.miho.chumpy.ui.StatsUiState
 import slop.miho.chumpy.ui.UpdateUiState
 import slop.miho.chumpy.data.UiSettings
+import slop.miho.chumpy.data.UiStyle
 import slop.miho.chumpy.data.ServersSort
 import slop.miho.chumpy.ui.components.InputMode
 import slop.miho.chumpy.ui.components.controllerFocusBoundary
@@ -807,11 +808,17 @@ private fun ShellDestinationPage(
         }
     } else {
         when (val category = SettingsCategory.entries[position - settingsOffset]) {
-            SettingsCategory.INTERFACE -> InterfaceScreen(
-                settings = uiSettings,
-                onChange = onUiSettingsChange,
-                scrollState = interfaceScroll,
-            )
+            SettingsCategory.INTERFACE -> if (uiSettings.uiStyle == UiStyle.KIRAN) {
+                KiranSettingsScreen(
+                    onChange = onUiSettingsChange,
+                )
+            } else {
+                InterfaceScreen(
+                    settings = uiSettings,
+                    onChange = onUiSettingsChange,
+                    scrollState = interfaceScroll,
+                )
+            }
             SettingsCategory.CONNECTION -> ConnectionScreen(
                 connection = connection,
                 subscriptions = subscriptions,
