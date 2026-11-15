@@ -846,14 +846,11 @@ private fun ShellDestinationPage(
                     scrollState = interfaceScroll,
                 )
             }
-            SettingsCategory.CONNECTION -> ConnectionScreen(
+            SettingsCategory.CONNECTION -> CleanConnectionSettingsScreen(
                 connection = connection,
-                subscriptions = subscriptions,
-                flagStyle = uiSettings.flagStyle,
                 settings = uiSettings,
                 onChangeConnection = onChangeConnection,
                 onChangeSettings = onUiSettingsChange,
-                onToggleAutoUpdate = onToggleAutoUpdate,
             )
             SettingsCategory.ABOUT -> AboutScreen(
                 coreVersion = coreVersion,

@@ -148,6 +148,7 @@ fun HomeScreen(
             onConnect = onConnect,
             onDisconnect = onDisconnect,
             onOpenServers = onOpenServers,
+            onOpenStats = onOpenStats,
             modifier = modifier,
         )
         return
