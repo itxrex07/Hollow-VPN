@@ -831,10 +831,12 @@ private fun ShellDestinationPage(
         when (val category = SettingsCategory.entries[position - settingsOffset]) {
             SettingsCategory.INTERFACE -> if (uiSettings.uiStyle == UiStyle.KIRAN_A) {
                 KiranStyleASettingsScreen(
+                    settings = uiSettings,
                     onChange = onUiSettingsChange,
                 )
             } else if (uiSettings.uiStyle == UiStyle.KIRAN_B || uiSettings.uiStyle == UiStyle.KIRAN) {
                 KiranSettingsScreen(
+                    settings = uiSettings,
                     onChange = onUiSettingsChange,
                 )
             } else {
