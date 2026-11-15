@@ -214,6 +214,25 @@ fun FloatingBottomBar(
     categoryFocusRequester: FocusRequester? = null,
     modifier: Modifier = Modifier,
 ) {
+    val referenceStyle = LocalUiSettings.current.uiStyle
+    if (referenceStyle == slop.miho.chumpy.data.UiStyle.KIRAN_A ||
+        referenceStyle == slop.miho.chumpy.data.UiStyle.KIRAN_B ||
+        referenceStyle == slop.miho.chumpy.data.UiStyle.KIRAN
+    ) {
+        ReferenceBottomBar(
+            style = if (referenceStyle == slop.miho.chumpy.data.UiStyle.KIRAN_A) referenceStyle else slop.miho.chumpy.data.UiStyle.KIRAN_B,
+            selectedTab = selectedTab,
+            settingsOpen = settingsOpen,
+            selectedCategory = selectedCategory,
+            onTabSelected = onTabSelected,
+            onSettingsOpenChange = onSettingsOpenChange,
+            onCategorySelected = onCategorySelected,
+            modifier = modifier
+                .navigationBarsPadding()
+                .padding(horizontal = 20.dp, vertical = 10.dp),
+        )
+        return
+    }
     val motion = MaterialTheme.motionScheme
     // The classic bar stands in for the pills when picked (or, unpicked, on small screens);
     // flipping the setting crossfades one into the other.

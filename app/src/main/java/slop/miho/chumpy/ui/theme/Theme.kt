@@ -146,9 +146,9 @@ private fun themeColorScheme(
     context: Context,
 ): ColorScheme {
     val scheme = when {
-        settings.uiStyle == UiStyle.KIRAN_A -> darkColorScheme().withHue(Accent.GREEN.hue)
+        settings.uiStyle == UiStyle.KIRAN_A -> kiranGreenScheme()
         settings.uiStyle == UiStyle.KIRAN_B || settings.uiStyle == UiStyle.KIRAN ->
-            darkColorScheme().withHue(Accent.VIOLET.hue)
+            sarhadVioletScheme()
         settings.accent == Accent.ADAPTIVE && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S ->
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         settings.accent == Accent.MONO -> monoColorScheme(darkTheme)
@@ -161,6 +161,44 @@ private fun themeColorScheme(
     }
     return if (darkTheme && settings.themeMode == ThemeMode.AMOLED) scheme.amoled() else scheme
 }
+
+private fun kiranGreenScheme(): ColorScheme = darkColorScheme().copy(
+    primary = Color(0xFF86E3B0),
+    onPrimary = Color(0xFF00391F),
+    primaryContainer = Color(0xFF2F4B3C),
+    onPrimaryContainer = Color(0xFFCDEBD9),
+    secondary = Color(0xFFA5B5AB),
+    onSecondary = Color(0xFF15201A),
+    background = Color(0xFF0E1512),
+    onBackground = Color(0xFFE0E8E2),
+    surface = Color(0xFF0E1512),
+    onSurface = Color(0xFFE0E8E2),
+    surfaceVariant = Color(0xFF19211D),
+    onSurfaceVariant = Color(0xFFA5B5AB),
+    surfaceContainer = Color(0xFF19211D),
+    surfaceContainerHigh = Color(0xFF232C27),
+    surfaceContainerHighest = Color(0xFF2F3A33),
+    outline = Color(0xFF526159),
+)
+
+private fun sarhadVioletScheme(): ColorScheme = darkColorScheme().copy(
+    primary = Color(0xFF6C60F0),
+    onPrimary = Color.White,
+    primaryContainer = Color(0xFF4A3FD6),
+    onPrimaryContainer = Color(0xFFE3DFFF),
+    secondary = Color(0xFFA29DC4),
+    onSecondary = Color(0xFF1A1924),
+    background = Color(0xFF0B0B10),
+    onBackground = Color(0xFFEDEBF7),
+    surface = Color(0xFF0B0B10),
+    onSurface = Color(0xFFEDEBF7),
+    surfaceVariant = Color(0xFF17171F),
+    onSurfaceVariant = Color(0xFFA29DC4),
+    surfaceContainer = Color(0xFF17171F),
+    surfaceContainerHigh = Color(0xFF1B1B24),
+    surfaceContainerHighest = Color(0xFF24243A),
+    outline = Color(0xFF4A4860),
+)
 
 /**
  * The "themed" icon's art color, resolved outside composition — the QS tile lives in the
