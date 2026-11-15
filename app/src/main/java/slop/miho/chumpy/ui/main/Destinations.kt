@@ -21,6 +21,7 @@ enum class MainTab(
 ) : PillDestination {
     HOME(R.drawable.ic_home, R.string.nav_home, R.drawable.ic_home_fill),
     SERVERS(R.drawable.ic_servers, R.string.nav_servers),
+    SETTINGS(R.drawable.ic_settings, R.string.nav_settings),
     STATS(R.drawable.ic_stats, R.string.nav_stats),
 }
 

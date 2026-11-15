@@ -450,7 +450,12 @@ fun MainShell(viewModel: MainViewModel) {
                     onSelectPage = { position ->
                         if (position < MainTab.entries.size) {
                             selectedTab = MainTab.entries[position]
-                            settingsOpen = false
+                            if (selectedTab == MainTab.SETTINGS) {
+                                settingsOpen = true
+                                selectedCategory = SettingsCategory.INTERFACE
+                            } else {
+                                settingsOpen = false
+                            }
                         } else {
                             selectedCategory = SettingsCategory.entries[position - MainTab.entries.size]
                             settingsOpen = true
@@ -515,7 +520,12 @@ fun MainShell(viewModel: MainViewModel) {
                     onSelectPage = { position ->
                         if (position < MainTab.entries.size) {
                             selectedTab = MainTab.entries[position]
-                            settingsOpen = false
+                            if (selectedTab == MainTab.SETTINGS) {
+                                settingsOpen = true
+                                selectedCategory = SettingsCategory.INTERFACE
+                            } else {
+                                settingsOpen = false
+                            }
                         } else {
                             selectedCategory = SettingsCategory.entries[position - MainTab.entries.size]
                             settingsOpen = true
@@ -588,7 +598,12 @@ fun MainShell(viewModel: MainViewModel) {
                     selectedTab = selectedTab,
                     onTabSelected = {
                         selectedTab = it
-                        settingsOpen = false
+                        if (it == MainTab.SETTINGS) {
+                            settingsOpen = true
+                            selectedCategory = SettingsCategory.INTERFACE
+                        } else {
+                            settingsOpen = false
+                        }
                         // A destination picked from the bar hands the stage to its screen:
                         // the bar goes, the focus with it. Home keeps the bar — it is
                         // Home's own look.
@@ -598,6 +613,7 @@ fun MainShell(viewModel: MainViewModel) {
                     // The gear always lands on the About page, not wherever the user left off.
                     onSettingsOpenChange = { open ->
                         settingsOpen = open
+                        if (!open && selectedTab == MainTab.SETTINGS) selectedTab = MainTab.HOME
                         if (open) selectedCategory = SettingsCategory.ABOUT
                         // The gear and the back morph are the bar switching its own two
                         // faces — the bar stays for them whatever else it would do.
@@ -795,6 +811,11 @@ private fun ShellDestinationPage(
                     onSortServers = onSortServers,
                 )
             }
+            MainTab.SETTINGS -> InterfaceScreen(
+                settings = uiSettings,
+                onChange = onUiSettingsChange,
+                scrollState = interfaceScroll,
+            )
             MainTab.STATS -> {
                 // Collected in the branch, not the shell's top: the flow ticks once
                 // a second and only ever recomposes this page.

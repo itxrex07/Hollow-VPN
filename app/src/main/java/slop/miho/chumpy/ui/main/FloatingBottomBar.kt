@@ -271,16 +271,13 @@ fun FloatingBottomBar(
                             // ever active on Home, where the greeting already says where the
                             // user is — and leaving it would only play them collapsing.
                             ClassicBarItems(
-                                MainTab.entries,
+                                MainTab.entries.filter { it != MainTab.STATS },
                                 selectedTab,
                                 onTabSelected,
                                 colors,
                                 bare = { it == MainTab.HOME },
                                 focusRequester = tabFocusRequester,
                             )
-                            ClassicBarButton(R.drawable.ic_settings, R.string.nav_settings, colors) {
-                                onSettingsOpenChange(true)
-                            }
                         }
                     }
                 }
@@ -357,7 +354,7 @@ private fun FloatingMainBar(
                     // The tabs face's own requester: the morph dissolves the face that
                     // leaves, so a summon landing here always takes the row that holds.
                     PillItems(
-                        MainTab.entries,
+                        MainTab.entries.filter { it != MainTab.STATS },
                         selectedTab,
                         onTabSelected,
                         focusRequester = tabFocusRequester,
@@ -365,7 +362,7 @@ private fun FloatingMainBar(
                 }
             }
         }
-        BarSurface(backdrop = backdrop) {
+        if (settingsOpen) BarSurface(backdrop = backdrop) {
             AnimatedContent(
                 targetState = settingsOpen,
                 transitionSpec = { morph(motion) },
@@ -379,17 +376,6 @@ private fun FloatingMainBar(
                         selectedCategory,
                         onCategorySelected,
                         focusRequester = categoryFocusRequester,
-                    )
-                } else {
-                    // The gear spins away as it unfolds into the category pill.
-                    val rotation by transition.animateFloat(label = "gear rotation") { state ->
-                        if (state == EnterExitState.Visible) 0f else 120f
-                    }
-                    RoundBarButton(
-                        icon = R.drawable.ic_settings,
-                        contentDescription = stringResource(R.string.nav_settings),
-                        onClick = { onSettingsOpenChange(true) },
-                        iconModifier = Modifier.graphicsLayer { rotationZ = rotation },
                     )
                 }
             }
