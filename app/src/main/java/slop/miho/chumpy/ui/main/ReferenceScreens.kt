@@ -167,7 +167,9 @@ private fun ReferenceConnectButton(style: UiStyle, connected: Boolean, connectin
 @Composable
 private fun ReferenceCard(color: Color, modifier: Modifier = Modifier, content: @Composable () -> Unit) {
     Surface(color = color, shape = RoundedCornerShape(28.dp), modifier = modifier.fillMaxWidth()) {
-        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp), content = content)
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            content()
+        }
     }
 }
 
